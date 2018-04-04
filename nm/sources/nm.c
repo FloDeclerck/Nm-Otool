@@ -6,13 +6,22 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 12:13:24 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/03/26 13:10:27 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/04 16:25:12 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/nm.h"
 
-int		ft_nm(t_file *file)
+int		ft_nm(t_data *data)
 {
-	return (0);
+	data->magic_number = *(unsigned int *)data->ptr;
+	if (data->magic_number == MH_MAGIC_64)
+		ft_handle_64(data->ptr, NULL);
+	//else if (data->magic_number == MH_MAGIC)
+	//	ft_handle_32(data->ptr);
+	//else if (data->magic_number == FAT_CIGAM)
+	//	return (ft_handle_fat(data->ptr, 0) + 2);
+	//else
+	return(0);
+	//return (1);
 }

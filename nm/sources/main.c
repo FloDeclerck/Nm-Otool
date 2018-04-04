@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 12:25:33 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/03/26 12:42:37 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/04 16:43:06 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int		main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		printf("ERROR : Not enough arguments\n");
+		ft_putstr("ERROR : Not enough arguments\n");
 		return (-1);
 	}
-
+	ft_read_file(av[1]);
 	return (0);
 }

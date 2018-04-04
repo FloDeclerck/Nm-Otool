@@ -6,25 +6,27 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 12:36:15 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/03/26 12:58:01 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/04 16:24:49 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/nm.h"
 
-t_file		*ft_read_file(char *filename)
+t_data		*ft_read_file(char *file)
 {
 	int		fd;
-	t_file	*file;
+	t_data	*data;
 
-	file = (t_file*)malloc(sizeof(t_file));
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	if (fstat(fd, &file->buf) < 0)
-		return (NULL);
-	if ((file->ptr = mmap(0, file->buf.st_size, PROT_READ,
+	data = (t_data*)malloc(sizeof(t_data));
+	if ((fd = open(file, O_RDONLY)) < 0)
+		ft_putstr("ERROR : Open\n");
+	if (fstat(fd, &data->buf) < 0)
+		ft_putstr("ERROR : Fstat\n");
+	if ((data->ptr = mmap(0, data->buf.st_size, PROT_READ,
 					MAP_PRIVATE, fd, 0)) == MAP_FAILED)
-		return (NULL);
-	return (file);
+		printf("ERROR : Mmap\n");
+	ft_nm(data);
+	if (munmap(data->ptr, data->buf.st_size) < 0)
+		ft_putstr("ERROR : Munmap");
+	return (data);
 }
