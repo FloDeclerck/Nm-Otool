@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 12:14:20 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/04 16:26:12 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/05 15:44:36 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void		ft_print_64(char *ptr, int nsyms, struct nlist_64 *nl)
 {
 	int		i;
+	char	hex[20];
+	char	*strings[nsyms];
 
-	i = 0;
+	i = -1;
 	while (i < nsyms)
 	{
 		printf("%s\n", ptr + nl[i].n_un.n_strx);
