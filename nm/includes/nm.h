@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 12:18:02 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/04 16:24:43 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/13 13:10:14 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <stdlib.h>
+# include <stdarg.h>
 
 # include "../../libft/libft.h"
 
@@ -31,10 +32,32 @@ typedef struct		s_data
 	void			*ptr;
 }					t_data;
 
+typedef struct		s_section
+{
+	uint32_t		text;
+	uint32_t		data;
+	uint32_t		bss;
+	uint32_t		nsects;
+}					t_section;
+
 t_data		*ft_read_file(char *filename);
 
 int			ft_nm(t_data *data);
 
 void		ft_handle_64(struct mach_header_64 *header, struct symtab_command *sym);
+
+void		*ft_init_sections(t_section *sect);
+
+void		ft_get_sections(t_section *sect, uint32_t i, struct section *s, size_t size);
+
+t_section	*ft_section_number(struct load_command *lc, uint32_t ncmds);
+
+void		ft_swap_addr(void *a, void *b, size_t size);
+
+void		ft_print_addr(char *ptr, unsigned long addr, int size);
+
+void		ft_sort_symbols(char **a, size_t size);
+
+char		ft_get_type(uint16_t n_type, uint16_t n_sect, uint64_t n_value);
 
 #endif

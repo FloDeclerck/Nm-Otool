@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file.c                                             :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/26 12:36:15 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/05 15:20:21 by fdeclerc         ###   ########.fr       */
+/*   Created: 2018/04/13 10:45:07 by fdeclerc          #+#    #+#             */
+/*   Updated: 2018/04/13 10:48:47 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/nm.h"
 
-/*t_data		*ft_read_file(char *file)
+void		ft_swap_addr(void *a, void *b, size_t size)
 {
-	int		fd;
-	t_data	*data;
+	size_t	i;
+	unsigned char tmp;
+	unsigned char *addr_a;
+	unsigned char *addr_b;
 
-	data = (t_data*)malloc(sizeof(t_data));
-	fd = open(file, O_RDONLY);
-	if (fd < 0 || fstat(fd, &data->buf) < 0 ||
-			(data->ptr = mmap(0, data->buf.st_size, PROT_READ,
-				MAP_PRIVATE, fd, 0)) == MAP_FAILED)
-		return (NULL);
-	ft_nm(data);
-	data->magic_number = *(unsigned int *)(data->ptr);
-	return (data);
-}*/
+	addr_a = (unsigned char *)a;
+	addr_b = (unsigned char *)b;
+
+	i = 0;
+
+	while (i < size)
+	{
+		tmp = addr_a[i];
+		addr_a[i] = addr_b[i];
+		addr_b[i] = tmp;
+		i++;
+	}
+}

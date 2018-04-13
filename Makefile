@@ -6,7 +6,7 @@
 #    By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/25 11:10:38 by fdeclerc          #+#    #+#              #
-#    Updated: 2018/04/04 14:52:44 by fdeclerc         ###   ########.fr        #
+#    Updated: 2018/04/13 11:44:37 by fdeclerc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ LIBS =		-L$(LFT) -lft
 
 SRC =		./nm/sources/main.c\
 			./nm/sources/nm.c\
-			./nm/sources/file.c\
+			./nm/sources/sections.c\
+			./nm/sources/swap.c\
+			./nm/sources/symbols.c\
 			./nm/sources/handle64.c\
 
 RM =		rm -rf

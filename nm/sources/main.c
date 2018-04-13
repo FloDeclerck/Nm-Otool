@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 12:25:33 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/05 15:19:48 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/13 12:40:50 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,18 @@ void	ft_check_file(t_data *data)
 	free(data);
 }
 
+void		ft_print_multi(int size, ...)
+{
+	int i;
+	va_list strings;
+
+	va_start(strings, size);
+	i = 0;
+	while (i++ < size)
+		ft_putstr(va_arg(strings, char*));
+	va_end(strings);
+}
+
 int		main(int ac, char **av)
 {
 	int i;
@@ -58,6 +70,8 @@ int		main(int ac, char **av)
 	i = 0;
 	while (++i < ac)
 	{
+		if (ac > 2)
+			ft_print_multi(3, "\n", av[i], ":\n");
 		ft_check_file(ft_read_file(av[i]));
 	}
 	return (0);

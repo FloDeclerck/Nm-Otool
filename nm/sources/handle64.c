@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 12:14:20 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/05 15:44:36 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/13 13:13:31 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,23 @@ void		ft_print_64(char *ptr, int nsyms, struct nlist_64 *nl)
 	char	*strings[nsyms];
 
 	i = -1;
-	while (i < nsyms)
+	while (++i < nsyms)
 	{
-		printf("%s\n", ptr + nl[i].n_un.n_strx);
-		i++;
+		ft_memset(hex, ' ', 19);
+		hex[19] = 0;
+		hex[17] = ft_get_type(nl[i].n_type, nl[i].n_sect,
+				nl[i].n_value);
+		if (nl[i].n_type != 0x1)
+			ft_print_addr(hex, nl[i].n_value, 15);
+		strings[i] = ft_strjoin(hex, ptr + nl[i].n_un.n_strx);
+	}
+	ft_sort_symbols(strings, nsyms);
+	i = -1;
+	while (++i < nsyms)
+	{
+		if (strings[i][17] != '-')
+			ft_putendl(strings[i]);
+		free(strings[i]);
 	}
 }
 
@@ -32,8 +45,9 @@ void		ft_print_64(char *ptr, int nsyms, struct nlist_64 *nl)
 	unsigned int		i;
 	struct load_command *lc;
 
-	i = 0;
 	lc = (struct load_command *)(header + 1);
+	ft_section_number(lc,  header->ncmds);
+	i = 0;
 	while (i < header->ncmds)
 	{
 		if (lc->cmd == LC_SYMTAB)
