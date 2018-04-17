@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 12:18:02 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/13 13:10:14 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:32:50 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ t_data		*ft_read_file(char *filename);
 int			ft_nm(t_data *data);
 
 void		ft_handle_64(struct mach_header_64 *header, struct symtab_command *sym);
+void		ft_handle_32(struct mach_header *header, struct symtab_command *symtab);
+int			ft_handle_fat(struct fat_header *header, uint32_t nfat_arch);
+
+uint32_t	ft_swap_uint32(uint32_t num);
 
 void		*ft_init_sections(t_section *sect);
 

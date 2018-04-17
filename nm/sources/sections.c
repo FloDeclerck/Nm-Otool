@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 11:01:56 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/13 12:35:49 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:38:08 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void			*ft_init_sections(t_section *sect)
 void			ft_get_sections(t_section *sect, uint32_t i,
 		struct section *s, size_t size)
 {
-	while (i-- > 0)
+	while (i > 0)
 	{
 		if (ft_strcmp(s->sectname, SECT_TEXT) == 0 &&
 				ft_strcmp(s->segname, SEG_TEXT) == 0)
@@ -39,6 +39,7 @@ void			ft_get_sections(t_section *sect, uint32_t i,
 				sect->bss = sect->nsects;
 		s = (void *)s + size;
 		sect->nsects++;
+		i--;
 	}
 }
 
@@ -49,7 +50,7 @@ t_section		*ft_section_number(struct load_command *lc, uint32_t ncmds)
 	if (lc == NULL)
 		return (sect);
 	sect = ft_init_sections(sect);
-	while (ncmds-- > 0)
+	while (ncmds > 0)
 	{
 		if (lc->cmd == LC_SEGMENT)
 			ft_get_sections(sect, ((struct segment_command*)lc)->nsects,
@@ -60,6 +61,7 @@ t_section		*ft_section_number(struct load_command *lc, uint32_t ncmds)
 					(void *)lc + sizeof(struct segment_command_64),
 					sizeof(struct section_64));
 		lc = (void *)lc + lc->cmdsize;
+		ncmds--;
 	}
 	return (sect);
 }

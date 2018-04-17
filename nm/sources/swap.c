@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 10:45:07 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/13 10:48:47 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:09:45 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,16 @@ void		ft_swap_addr(void *a, void *b, size_t size)
 		addr_b[i] = tmp;
 		i++;
 	}
+}
+
+uint32_t		ft_swap_uint32(uint32_t num)
+{
+	num = ((num << 8) & 0xFF00FF00) | ((num >> 8) & 0xFF00FF);
+	return (num >> 16) | (num << 16);
+}
+
+int32_t			ft_swap_int32(int32_t num)
+{
+	num = ((num << 8) & 0xFF00FF00) | ((num >> 8) & 0xFF00FF);
+	return (num << 16) | ((num >> 16) & 0xFFFF);
 }

@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 10:24:51 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/13 13:16:16 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:48:34 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,19 @@ void		ft_sort_symbols(char **a, size_t size)
 	size_t	i;
 	size_t	j;
 
-	i = -1;
-	while (++i < size - 1)
+	i = 0;
+	while (i < size - 1)
 	{
-		j = -1;
-		while (++j < size - i - 1)
+		j = 0;
+		while (j < size - i - 1)
 		{
 			res = ft_strcmp(a[j] + 19, a[j + 1] + 19);
 			if (res > 0 || (res == 0 && ft_strncmp(a[j] + 17,
 							a[j + 1] + 17, 1) < 0))
 				ft_swap_addr(a + j, a + j + 1, sizeof(char *));
+			j++;
 		}
+		i++;
 	}
 }
 char		ft_get_type(uint16_t n_type, uint16_t n_sect, uint64_t n_value)

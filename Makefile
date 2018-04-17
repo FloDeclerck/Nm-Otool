@@ -6,7 +6,7 @@
 #    By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/25 11:10:38 by fdeclerc          #+#    #+#              #
-#    Updated: 2018/04/13 11:44:37 by fdeclerc         ###   ########.fr        #
+#    Updated: 2018/04/17 16:34:14 by fdeclerc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SRC =		./nm/sources/main.c\
 			./nm/sources/swap.c\
 			./nm/sources/symbols.c\
 			./nm/sources/handle64.c\
+			./nm/sources/handle32.c\
+			./nm/sources/fat.c\
 
 RM =		rm -rf
 
