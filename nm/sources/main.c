@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 12:25:33 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/17 15:18:42 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/17 17:01:14 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int		main(int ac, char **av)
 		ft_check_file(ft_read_file("a.out"));
 		return (0);
 	}
-	i = 0;
-	while (++i < ac)
+	i = 1;
+	while (i < ac)
 	{
 		if (ac > 2)
 		{
@@ -65,6 +65,7 @@ int		main(int ac, char **av)
 			ft_putstr(":\n");
 		}
 		ft_check_file(ft_read_file(av[i]));
+		i++;
 	}
 	return (0);
 }

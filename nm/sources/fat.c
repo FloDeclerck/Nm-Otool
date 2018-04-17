@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:53:49 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/17 16:50:30 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/17 17:02:24 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			ft_handle_fat(struct fat_header *header, uint32_t nfat_arch)
 			if (__POINTER_WIDTH__ == 32)
 				break;
 		}
-		arch++;
+		arch += 1;
 		nfat_arch--;
 	}
 	data.magic_number = *(unsigned int *)data.ptr;
