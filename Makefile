@@ -6,7 +6,7 @@
 #    By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/25 11:10:38 by fdeclerc          #+#    #+#              #
-#    Updated: 2018/04/18 10:45:19 by fdeclerc         ###   ########.fr        #
+#    Updated: 2018/04/18 12:56:25 by fdeclerc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ SRC_NM =	./nm/sources/main.c\
 
 SRC_OT =	./otool/sources/main.c\
 			./otool/sources/otool.c\
+			./otool/sources/handle64.c\
+			./otool/sources/handle32.c\
+			./otool/sources/section.c\
 			./nm/sources/sections.c\
 			./nm/sources/swap.c\
 			./nm/sources/symbols.c\
