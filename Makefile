@@ -6,11 +6,12 @@
 #    By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/25 11:10:38 by fdeclerc          #+#    #+#              #
-#    Updated: 2018/04/17 16:34:14 by fdeclerc         ###   ########.fr        #
+#    Updated: 2018/04/18 10:45:19 by fdeclerc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_NM =	ft_nm
+NAME_OT =	ft_otool
 
 CC = 		gcc -Wall -Wextra -Werror
 
@@ -18,31 +19,47 @@ LFLAGS = 	-fPIC
 
 LFT =		libft/
 
-LIBS =		-L$(LFT) -lft
+LIBS =		-L$(LFT) -lft -lm
 
-SRC =		./nm/sources/main.c\
+SRC_NM =	./nm/sources/main.c\
 			./nm/sources/nm.c\
-			./nm/sources/sections.c\
-			./nm/sources/swap.c\
-			./nm/sources/symbols.c\
 			./nm/sources/handle64.c\
 			./nm/sources/handle32.c\
 			./nm/sources/fat.c\
+			./nm/sources/sections.c\
+			./nm/sources/swap.c\
+			./nm/sources/symbols.c\
+
+
+SRC_OT =	./otool/sources/main.c\
+			./otool/sources/otool.c\
+			./nm/sources/sections.c\
+			./nm/sources/swap.c\
+			./nm/sources/symbols.c\
+
+OBJ_NM =		$(SRC_NM:%.c=%.o)
+OBJ_OT = 		$(SRC_OT:%.c=%.o)
+
+LIBFT =			libft/libft.a
 
 RM =		rm -rf
 
-OBJ =		$(SRC:.c=.o)
+all:		$(NAME_NM) $(NAME_OT)
 
-OBJDIR = 	obj
+$(LIBFT):
+	@echo "COMPILING LIBFT..."
+	@make -C libft/
+	@echo "Done"
 
-all:		$(NAME_NM)
-
-$(NAME_NM):	$(OBJ)
-			@make -C $(LFT)
+$(NAME_NM): $(LIBFT) $(OBJ_NM)
 			@echo "\033[32m[BUILDING $(NAME_NM)] \033[0m" | tr -d '\n'
-			@$(CC) $(LFLAGS) -o $(NAME_NM) $(OBJ) $(LIBS)
-			mkdir -p $(OBJDIR) && mv $(OBJ) ./$(OBJDIR)/
+			@$(CC) $(LFLAGS) -o $(NAME_NM) $(OBJ_NM) $(LIBS)
 			@echo "\033[32m[$(NAME_NM) IS READY !]\033[0m"
+
+$(NAME_OT): $(LIBFT) $(OBJ_OT)
+			@echo "\033[32m[BUILDING $(NAME_OT)] \033[0m" | tr -d '\n'
+			@$(CC) $(LFLAGS) -o $(NAME_OT) $(OBJ_OT) $(LIBS)
+			@echo "\033[32m[$(NAME_OT) IS READY !] \033[0m"
 
 %.o:		%.c
 			@echo "\033[36m[COMPILING...]\033[0m" | tr -d '\n'
@@ -50,12 +67,13 @@ $(NAME_NM):	$(OBJ)
 
 clean:
 			@echo "\033[31m[CLEANING SOURCES] \033[0m" | tr -d '\n'
-			$(RM) $(OBJDIR)
+			$(RM) $(OBJ_NM) $(OBJ_OT)
 			@make clean -C libft
 
 fclean:		clean
 			@echo "\033[31m[FCLEAN $(NAME_NM)] \033[0m" | tr -d '\n'
-			$(RM) $(NAME_NM)
+			@echo "\033[31m[FCLEAN $(NAME_OT)] \033[0m" | tr -d '\n'
+			$(RM) $(NAME_NM) $(NAME_OT)
 			@make fclean -C libft
 
 re:			fclean all
