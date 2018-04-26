@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 12:25:33 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/18 12:56:13 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/26 12:15:34 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_data		*ft_read_file(char *file)
 {
-	int fd;
-	t_data *data;
+	int		fd;
+	t_data	*data;
 
 	fd = open(file, O_RDONLY);
 	data = (t_data *)malloc(sizeof(t_data));
@@ -31,9 +31,9 @@ t_data		*ft_read_file(char *file)
 	return (data);
 }
 
-void	ft_check_file(t_data *data)
+void		ft_check_file(t_data *data)
 {
-	int arg;
+	int		arg;
 
 	if (data == NULL)
 		return (ft_putstr("ERROR : Not Access to the File\n"));
@@ -46,9 +46,9 @@ void	ft_check_file(t_data *data)
 	free(data);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
-	int i;
+	int		i;
 
 	if (ac < 2)
 	{

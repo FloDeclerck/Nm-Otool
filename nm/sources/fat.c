@@ -6,7 +6,7 @@
 /*   By: fdeclerc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:53:49 by fdeclerc          #+#    #+#             */
-/*   Updated: 2018/04/17 17:02:24 by fdeclerc         ###   ########.fr       */
+/*   Updated: 2018/04/26 12:53:19 by fdeclerc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,22 @@ int			ft_handle_fat(struct fat_header *header, uint32_t nfat_arch)
 
 	nfat_arch = ft_swap_uint32(header->nfat_arch);
 	arch = (void *)(header + 1);
-	while (nfat_arch)
+	while (nfat_arch--)
 	{
 		mach = (void *)((void *)header + ft_swap_uint32(arch->offset));
 		if (mach->magic == MH_MAGIC_64 && mach->cputype == CPU_TYPE_X86_64)
 		{
 			data.ptr = (void *)header + ft_swap_uint32(arch->offset);
 			if (__POINTER_WIDTH__ == 64)
-				break;
+				break ;
 		}
 		if (mach->magic == MH_MAGIC && mach->cputype == CPU_TYPE_X86)
 		{
 			data.ptr = (void *)header + ft_swap_uint32(arch->offset);
 			if (__POINTER_WIDTH__ == 32)
-				break;
+				break ;
 		}
-		arch += 1;
-		nfat_arch--;
+		arch = arch + 1;
 	}
 	data.magic_number = *(unsigned int *)data.ptr;
 	return (ft_nm(&data));
